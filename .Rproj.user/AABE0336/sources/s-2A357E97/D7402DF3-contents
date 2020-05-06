@@ -17,10 +17,22 @@ Hexagon = R6::R6Class(
       self$set_center(center)
       invisible(self)
     }
+    ,deep_clone = function(){
+      cc = self$clone()
+      cc$.__enclos_env__$private$.cube_center = cc$center$clone()
+      return(cc)
+    }
     ,is_pointy = function() private$.pointy_top
-    ,set_center = function(x){
-      private$.cube_center = HexCubeCenter$new(x)
-      invisible(self)
+    ,set_center = function(x, in_place=TRUE){
+      if(in_place){
+        private$.cube_center = HexCubeCenter$new(x)
+        invisible(self)
+      }
+      else {
+        cc = self$deep_clone()
+        cc$set_center(x, in_place=TRUE)
+        return(cc)
+      }
     }
     ,get_center = function(){
       # return cube coords
@@ -82,11 +94,6 @@ PointyHexagon = R6::R6Class(
     initialize = function(center, size, planar_origin=c(0,0)){
       super$initialize(center, size, planar_origin, pointy_top=TRUE)
     }
-    ,deep_clone = function(){
-      cc = self$clone()
-      cc$.__enclos_env__$private$.cube_center = cc$center$clone()
-      return(cc)
-    }
     ,v_coordinates = function(){
       center = self$get_planar_center()$value
       size = self$size
@@ -99,32 +106,23 @@ PointyHexagon = R6::R6Class(
     ,get_planar_center = function(){
       center = self$get_center()
       cartesian_coords = Coords$
-        new(c(private$.r_to_x(center$r),
-              private$.q_to_y(center$q)))
+        new(private$.hex_to_cartesian(center$q, center$r))
       cartesian_coords
     }
-    ,shift_horizontal = function(i, in_place=TRUE){
-      if(in_place){
-        self$center$set_r(self$center$r + i)
-        invisible(self)
-      }
-      else {
-        h = self$deep_clone()
-        h$center$set_r(h$center$r + i)
-        return(h)
-      }
+    ,shift_on_q = function(i, in_place=TRUE){
+      cc = self$center$clone()
+      cc$shift_on_q(i, in_place=TRUE)
+      self$set_center(cc, in_place=in_place)
     }
-    ,shift_left = function(i, in_place=TRUE){
-      self$shift_horizontal(-i, in_place=in_place)
+    ,shift_on_r = function(i, in_place=TRUE){
+      cc = self$center$clone()
+      cc$shift_on_r(i, in_place=TRUE)
+      self$set_center(cc, in_place=in_place)
     }
-    ,shift_right = function(i, in_place=TRUE){
-      self$shift_horizontal(i, in_place=in_place)
-    }
-    ,shift_up = function(i){
-
-    }
-    ,shift_down = function(i){
-
+    ,shift_on_s = function(i, in_place=TRUE){
+      cc = self$center$clone()
+      cc$shift_on_s(i, in_place=TRUE)
+      self$set_center(cc, in_place=in_place)
     }
   ),
   active = list(
@@ -160,17 +158,9 @@ PointyHexagon = R6::R6Class(
       angle_deg = 60 * i - 30
       angle_deg
     }
-    ,.q_to_y = function(q){
-      angle_deg = 30
-      angle_rad = pi / 180 * 30
-      q * cos(angle_rad) * self$height + self$planar_origin[[2]]
-    }
-    ,.r_to_x = function(r){
-      r * self$width + self$planar_origin[[1]]
-    }
     ,.hex_to_cartesian = function(q, r){
-      x = self$size * (sqrt(3) * q  +  sqrt(3)/2 * r)
-      y = self$size * (3./2 * r) +
+      x = self$size * (sqrt(3) * q  +  sqrt(3)/2 * r) + self$planar_origin[[1]]
+      y = self$size * (3./2 * r) + self$planar_origin[[2]]
       return(Coords$new(c(x, y)))
     }
     ,.hex_polygon = function(){

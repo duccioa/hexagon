@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "3688100527",
+    "hash" : "2760257899",
     "id" : "85DD6337",
-    "lastKnownWriteTime" : 1588804083,
-    "last_content_update" : 1588804083087,
+    "lastKnownWriteTime" : 1588807639,
+    "last_content_update" : 1588807639982,
     "path" : "~/CLOUD/01_Cloud/01_Work/05_Smart4Cast/hexagon/tests/testthat/test-class_Hexagon.R",
     "project_path" : "tests/testthat/test-class_Hexagon.R",
     "properties" : {
         "cursorPosition" : "33,0",
-        "scrollLine" : "11"
+        "scrollLine" : "12"
     },
     "read_only" : false,
     "read_only_alternatives" : [

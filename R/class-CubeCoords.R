@@ -34,7 +34,7 @@ CubeCoords = R6::R6Class(
         return(cc)
       }
     }
-    #' @description Set the q coordinate value.
+    #' @description Set the 'q' coordinate value.
     #' @param q Numeric coordinate of length 1.
     #' @return Invisible self.
     ,set_q = function(q, in_place=TRUE){
@@ -47,7 +47,7 @@ CubeCoords = R6::R6Class(
       coords[3] = sum(-coords[-3])
       self$set(coords, in_place=in_place)
     }
-    #' @description Set the r coordinate value.
+    #' @description Set the 'r' coordinate value.
     #' @param r Numeric coordinate of length 1.
     #' @return Invisible self.
     ,set_r = function(r, in_place=TRUE){
@@ -82,6 +82,17 @@ CubeCoords = R6::R6Class(
         out = super$get(i)
       }
       return(out)
+    }
+    ,shift_on_q = function(i, in_place=TRUE){
+      self$set_q(self$q + i, in_place=in_place)
+    }
+    ,shift_on_r = function(i, in_place=TRUE){
+      self$set_r(self$r + i, in_place=in_place)
+    }
+    ,shift_on_s = function(i, in_place=TRUE){
+      new_q = self$q + i
+      new_r = self$r + i
+      self$set(c(new_q, new_r), in_place=in_place)
     }
   ),
   active = list(
