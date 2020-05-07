@@ -1,3 +1,4 @@
+library(sf)
 test_that("Test Hexagon", {
   x = c(0,0,0)
   y = c(2,2,-4)
