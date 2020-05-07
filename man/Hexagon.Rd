@@ -7,7 +7,7 @@
 Hexagons are the primitive unit to build hex grids. They can be pointy
 or flat, depending on whether the top is a vertex or an edge.
 
-An hexagon is defined by its size and its position within the grid. A geographical
+An hexagon is defined by its radius and its position within the grid. A geographical
 hexagon is also defined by its geographical position.
 }
 \section{Geographical reference}{
@@ -25,7 +25,7 @@ specified. The geographical origin is assumed to be in planar coordinates.
 \describe{
 \item{\code{center}}{\code{CubeCoords} object.}
 
-\item{\code{size}}{numeric. The cartesian distance between
+\item{\code{radius}}{numeric. The cartesian distance between
 the center and any vertex of the hexagon.}
 
 \item{\code{planar_origin}}{numeric of length 2. The planar coordinates of the origin.}
@@ -42,8 +42,9 @@ the center and any vertex of the hexagon.}
 \item \href{#method-get_planar_center}{\code{Hexagon$get_planar_center()}}
 \item \href{#method-set_center}{\code{Hexagon$set_center()}}
 \item \href{#method-set_planar_origin}{\code{Hexagon$set_planar_origin()}}
-\item \href{#method-set_size}{\code{Hexagon$set_size()}}
+\item \href{#method-set_radius}{\code{Hexagon$set_radius()}}
 \item \href{#method-to_polygon}{\code{Hexagon$to_polygon()}}
+\item \href{#method-print}{\code{Hexagon$print()}}
 \item \href{#method-clone}{\code{Hexagon$clone()}}
 }
 }
@@ -53,7 +54,7 @@ the center and any vertex of the hexagon.}
 \subsection{Method \code{new()}}{
 Initialise a new instance.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Hexagon$new(center, size = NULL, planar_origin = NULL, pointy_top = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Hexagon$new(center, radius = NULL, planar_origin = NULL, pointy_top = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -62,7 +63,7 @@ Initialise a new instance.
 \item{\code{center}}{A vector of cube coordinates or an object that can be coerced to
 a \code{HexCubeCenter}.}
 
-\item{\code{size}}{A number defining the radius of the circumscribed circle
+\item{\code{radius}}{A number defining the radius of the circumscribed circle
 of the hexagon, in the units of the planar_origin.}
 
 \item{\code{planar_origin}}{A vector of geographical coordinates.
@@ -168,18 +169,18 @@ cloned otherwise.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-set_size"></a>}}
-\if{latex}{\out{\hypertarget{method-set_size}{}}}
-\subsection{Method \code{set_size()}}{
-Set the size of the hexagon. If \code{NULL} the size is set to 1.
+\if{html}{\out{<a id="method-set_radius"></a>}}
+\if{latex}{\out{\hypertarget{method-set_radius}{}}}
+\subsection{Method \code{set_radius()}}{
+Set the radius of the hexagon. If \code{NULL} the radius is set to 1.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Hexagon$set_size(size = NULL, in_place = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Hexagon$set_radius(radius = NULL, in_place = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{size}}{A number defining the radius of the circumscribed circle
+\item{\code{radius}}{A number defining the radius of the circumscribed circle
 of the hexagon, in the units of the planar_origin.}
 
 \item{\code{in_place}}{logical. If TRUE the instance is modifed by reference and
@@ -201,6 +202,16 @@ representation of the polygon in planar coordinates.
 \subsection{Returns}{
 An object of class \verb{XY, POLYGON, sfg} (see package \code{sf}).
 }
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-print"></a>}}
+\if{latex}{\out{\hypertarget{method-print}{}}}
+\subsection{Method \code{print()}}{
+Print method for class \code{Hexagon}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Hexagon$print()}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

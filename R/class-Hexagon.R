@@ -4,7 +4,7 @@
 #' @description Hexagons are the primitive unit to build hex grids. They can be pointy
 #' or flat, depending on whether the top is a vertex or an edge.
 #'
-#' An hexagon is defined by its size and its position within the grid. A geographical
+#' An hexagon is defined by its radius and its position within the grid. A geographical
 #' hexagon is also defined by its geographical position.
 #'
 #' @section Geographical reference:
@@ -14,7 +14,7 @@
 #'
 #' @param center A vector of cube coordinates or an object that can be coerced to
 #' a `HexCubeCenter`.
-#' @param size A number defining the radius of the circumscribed circle
+#' @param radius A number defining the radius of the circumscribed circle
 #' of the hexagon, in the units of the planar_origin.
 #' @param planar_origin A vector of geographical coordinates.
 #' If `NULL`, it is set to 0,0.
@@ -28,12 +28,12 @@ Hexagon = R6::R6Class(
     # Hexagon's public methods ----
     #' @description Initialise a new instance.
     #' @return An object of class `Hexagon`.
-    initialize = function(center, size=NULL, planar_origin=NULL,
+    initialize = function(center, radius=NULL, planar_origin=NULL,
                           pointy_top=TRUE){
       assert_that(is_logical(pointy_top),
                   msg="'pointy_top' must be logical")
       private$.pointy_top = pointy_top
-      self$set_size(size, in_place=TRUE)
+      self$set_radius(radius, in_place=TRUE)
       self$set_center(center, in_place=TRUE)
       self$set_planar_origin(planar_origin, in_place=TRUE)
       invisible(self)
@@ -49,11 +49,11 @@ Hexagon = R6::R6Class(
     #' @return A numeric matrix 6 by 2.
     ,v_planar_coordinates = function(){
       center = self$get_planar_center()$value
-      size = self$size
+      radius = self$radius
       angle_deg = private$.hex_angle_deg()
       angle_rad = pi / 180 * angle_deg
-      return (matrix(c(center[[1]] + size * cos(angle_rad),
-                       center[[2]] + size * sin(angle_rad)),
+      return (matrix(c(center[[1]] + radius * cos(angle_rad),
+                       center[[2]] + radius * sin(angle_rad)),
                      ncol=2))
     }
     #' @description Whether the hexagon is pointy or flat.
@@ -99,20 +99,20 @@ Hexagon = R6::R6Class(
         return(cc)
       }
     }
-    #' @description Set the size of the hexagon. If `NULL` the size is set to 1.
-    ,set_size = function(size=NULL, in_place=TRUE){
+    #' @description Set the radius of the hexagon. If `NULL` the radius is set to 1.
+    ,set_radius = function(radius=NULL, in_place=TRUE){
       if(in_place){
-        if(rlang::is_null(size)) size = 1
-        assert_that(is.numeric(size),
-                    msg="'size' must be numeric")
-        assert_that(length(size)==1,
-                    msg="'size' must be numeric of length 1")
-        private$.size = size
+        if(rlang::is_null(radius)) radius = 1
+        assert_that(is.numeric(radius),
+                    msg="'radius' must be numeric")
+        assert_that(length(radius)==1,
+                    msg="'radius' must be numeric of length 1")
+        private$.radius = radius
         invisible(self)
       }
       else{
         cc = self$deep_clone()
-        cc$set_size(size, in_place=TRUE)
+        cc$set_radius(radius, in_place=TRUE)
         return(cc)
       }
     }
@@ -124,8 +124,22 @@ Hexagon = R6::R6Class(
       coords = rbind(coords, coords[1,])
       hex = sf::st_polygon(list(coords))
       attr(hex, "pointy") = self$is_pointy()
-      attr(hex, "size") = self$size
+      attr(hex, "radius") = self$radius
       return(hex)
+    }
+    #' @description Print method for class `Hexagon`.
+    ,print = function(){
+      l = list(
+        sprintf("Object of class %s", class(self)[1])
+        ,sprintf("radius: %s", self$radius)
+        ,sprintf("Pointy top: %s", self$is_pointy())
+        ,sprintf("Planar origin: [%s]", paste(self$planar_origin,
+                                              collapse=","))
+        ,sprintf("Center: \n[%s]", paste(self$center$value,
+                                         collapse=","))
+      )
+      cat(do.call(paste, list(l, collapse="\n")))
+      invisible(self)
     }
   ),
   active = list(
@@ -137,11 +151,11 @@ Hexagon = R6::R6Class(
       else
         stop("Read-only value, use set methods instead")
     }
-    #' @field size numeric. The cartesian distance between
+    #' @field radius numeric. The cartesian distance between
     #' the center and any vertex of the hexagon.
-    ,size = function(x){
+    ,radius = function(x){
       if(missing(x))
-        private$.size
+        private$.radius
       else
         stop("Read-only value, use set methods instead")
     }
@@ -157,7 +171,7 @@ Hexagon = R6::R6Class(
     # Hexagon's private fields ----
     .pointy_top = NULL
     ,.cube_center = NULL
-    ,.size = NULL
+    ,.radius = NULL
     ,.planar_origin = NULL
     # Hexagon's private methods ----
   )
@@ -168,7 +182,7 @@ Hexagon = R6::R6Class(
 #' @description A class `Hexagon` with a pointy top.
 #' @param center A vector of cube coordinates or an object that can be coerced to
 #' a `HexCubeCenter`.
-#' @param size A number defining the radius of the circumscribed circle
+#' @param radius A number defining the radius of the circumscribed circle
 #' of the hexagon, in the units of the planar_origin.
 #' @param planar_origin A vector of geographical coordinates.
 #' If `NULL`, it is set to 0,0.
@@ -182,8 +196,8 @@ PointyHexagon = R6::R6Class(
     # PointyHexagon's public methods ----
     #' @description Initialise a new instance.
     #' @return An object of class `PointyHexagon`.
-    initialize = function(center, size=NULL, planar_origin=NULL){
-      super$initialize(center=center, size=size,
+    initialize = function(center, radius=NULL, planar_origin=NULL){
+      super$initialize(center=center, radius=radius,
                        planar_origin=planar_origin, pointy_top=TRUE)
     }
     #' @description Shift the hex center of `i` places in the cube system,
@@ -238,36 +252,23 @@ PointyHexagon = R6::R6Class(
       cc_shifted = hex_diagonal_neighbour(cc, direction) * i
       self$set_center(cc_shifted, in_place=in_place)
     }
-    ,print = function(){
-      l = list(
-        sprintf("Object of class %s", class(self)[1])
-        ,sprintf("Size: %s", self$size)
-        ,sprintf("Pointy top: %s", self$is_pointy())
-        ,sprintf("Planar origin: [%s]", paste(self$planar_origin,
-                                              collapse=","))
-        ,sprintf("Center: \n[%s]", paste(self$center$value,
-                                       collapse=","))
-      )
-      cat(do.call(paste, list(l, collapse="\n")))
-      invisible(self)
-    }
   ),
   active = list(
     # PointyHexagon's active fields ----
     #' @field width the distance between two edges of the hexagon in
-    #' the units of `size`.
+    #' the units of `radius`.
     width = function(x){
       if(missing(x)){
-        sqrt(3) * self$size
+        sqrt(3) * self$radius
       }
       else
         stop("Read-only field, use methods instead")
     }
     #' @field height the distance between two vertices of the hexagon in
-    #' the units of `size`.
+    #' the units of `radius`.
     ,height = function(x){
       if(missing(x)){
-        2 * self$size
+        2 * self$radius
       }
       else
         stop("Read-only field, use methods instead")
@@ -283,8 +284,8 @@ PointyHexagon = R6::R6Class(
       angle_deg
     }
     ,.hex_to_cartesian = function(q, r){
-      x = self$size * (sqrt(3) * q  +  sqrt(3)/2 * r) + self$planar_origin[[1]]
-      y = self$size * (3./2 * r) + self$planar_origin[[2]]
+      x = self$radius * (sqrt(3) * q  +  sqrt(3)/2 * r) + self$planar_origin[[1]]
+      y = self$radius * (3./2 * r) + self$planar_origin[[2]]
       return(Coords$new(c(x, y)))
     }
   )

@@ -46,9 +46,9 @@ It inherits from \code{CubeCoords} but it is specific for \code{Hexagon}.
 \item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="CubeCoords" data-id="set">}\href{../../hexagon/html/CubeCoords.html#method-set}{\code{hexagon::CubeCoords$set()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="CubeCoords" data-id="set_q">}\href{../../hexagon/html/CubeCoords.html#method-set_q}{\code{hexagon::CubeCoords$set_q()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="CubeCoords" data-id="set_r">}\href{../../hexagon/html/CubeCoords.html#method-set_r}{\code{hexagon::CubeCoords$set_r()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="CubeCoords" data-id="shift_on_q">}\href{../../hexagon/html/CubeCoords.html#method-shift_on_q}{\code{hexagon::CubeCoords$shift_on_q()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="CubeCoords" data-id="shift_on_r">}\href{../../hexagon/html/CubeCoords.html#method-shift_on_r}{\code{hexagon::CubeCoords$shift_on_r()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="CubeCoords" data-id="shift_on_s">}\href{../../hexagon/html/CubeCoords.html#method-shift_on_s}{\code{hexagon::CubeCoords$shift_on_s()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="CubeCoords" data-id="shift_along_q">}\href{../../hexagon/html/CubeCoords.html#method-shift_along_q}{\code{hexagon::CubeCoords$shift_along_q()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="CubeCoords" data-id="shift_along_r">}\href{../../hexagon/html/CubeCoords.html#method-shift_along_r}{\code{hexagon::CubeCoords$shift_along_r()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="CubeCoords" data-id="shift_along_s">}\href{../../hexagon/html/CubeCoords.html#method-shift_along_s}{\code{hexagon::CubeCoords$shift_along_s()}}\out{</span>}
 }
 \out{</details>}
 }

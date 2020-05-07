@@ -48,7 +48,7 @@ An \code{sfg} object.
 \description{
 Create a concentric hex grid in the geographical space. Concetric
 grids are built in concentric rings around an hexagon origin. The overall
-shape resembles an hexagon and the size is roughly \code{4 * n * hexagon_radius}
+shape resembles an hexagon and the diameter is roughly \code{4 * n * hexagon_radius}.
 }
 \section{Functions}{
 \itemize{

@@ -13,10 +13,10 @@ A class \code{Hexagon} with a pointy top.
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
 \item{\code{width}}{the distance between two edges of the hexagon in
-the units of \code{size}.}
+the units of \code{radius}.}
 
 \item{\code{height}}{the distance between two vertices of the hexagon in
-the units of \code{size}.}
+the units of \code{radius}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -38,9 +38,10 @@ the units of \code{size}.}
 \item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="Hexagon" data-id="deep_clone">}\href{../../hexagon/html/Hexagon.html#method-deep_clone}{\code{hexagon::Hexagon$deep_clone()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="Hexagon" data-id="get_planar_center">}\href{../../hexagon/html/Hexagon.html#method-get_planar_center}{\code{hexagon::Hexagon$get_planar_center()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="Hexagon" data-id="is_pointy">}\href{../../hexagon/html/Hexagon.html#method-is_pointy}{\code{hexagon::Hexagon$is_pointy()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="Hexagon" data-id="print">}\href{../../hexagon/html/Hexagon.html#method-print}{\code{hexagon::Hexagon$print()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="Hexagon" data-id="set_center">}\href{../../hexagon/html/Hexagon.html#method-set_center}{\code{hexagon::Hexagon$set_center()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="Hexagon" data-id="set_planar_origin">}\href{../../hexagon/html/Hexagon.html#method-set_planar_origin}{\code{hexagon::Hexagon$set_planar_origin()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="Hexagon" data-id="set_size">}\href{../../hexagon/html/Hexagon.html#method-set_size}{\code{hexagon::Hexagon$set_size()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="Hexagon" data-id="set_radius">}\href{../../hexagon/html/Hexagon.html#method-set_radius}{\code{hexagon::Hexagon$set_radius()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="Hexagon" data-id="to_polygon">}\href{../../hexagon/html/Hexagon.html#method-to_polygon}{\code{hexagon::Hexagon$to_polygon()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="Hexagon" data-id="v_planar_coordinates">}\href{../../hexagon/html/Hexagon.html#method-v_planar_coordinates}{\code{hexagon::Hexagon$v_planar_coordinates()}}\out{</span>}
 }
@@ -52,7 +53,7 @@ the units of \code{size}.}
 \subsection{Method \code{new()}}{
 Initialise a new instance.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PointyHexagon$new(center, size = NULL, planar_origin = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{PointyHexagon$new(center, radius = NULL, planar_origin = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -61,7 +62,7 @@ Initialise a new instance.
 \item{\code{center}}{A vector of cube coordinates or an object that can be coerced to
 a \code{HexCubeCenter}.}
 
-\item{\code{size}}{A number defining the radius of the circumscribed circle
+\item{\code{radius}}{A number defining the radius of the circumscribed circle
 of the hexagon, in the units of the planar_origin.}
 
 \item{\code{planar_origin}}{A vector of geographical coordinates.

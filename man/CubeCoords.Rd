@@ -53,9 +53,9 @@ the latter notation.
 \item \href{#method-set_q}{\code{CubeCoords$set_q()}}
 \item \href{#method-set_r}{\code{CubeCoords$set_r()}}
 \item \href{#method-get}{\code{CubeCoords$get()}}
-\item \href{#method-shift_on_q}{\code{CubeCoords$shift_on_q()}}
-\item \href{#method-shift_on_r}{\code{CubeCoords$shift_on_r()}}
-\item \href{#method-shift_on_s}{\code{CubeCoords$shift_on_s()}}
+\item \href{#method-shift_along_q}{\code{CubeCoords$shift_along_q()}}
+\item \href{#method-shift_along_r}{\code{CubeCoords$shift_along_r()}}
+\item \href{#method-shift_along_s}{\code{CubeCoords$shift_along_s()}}
 \item \href{#method-clone}{\code{CubeCoords$clone()}}
 }
 }
@@ -179,12 +179,12 @@ out of boundaries.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-shift_on_q"></a>}}
-\if{latex}{\out{\hypertarget{method-shift_on_q}{}}}
-\subsection{Method \code{shift_on_q()}}{
+\if{html}{\out{<a id="method-shift_along_q"></a>}}
+\if{latex}{\out{\hypertarget{method-shift_along_q}{}}}
+\subsection{Method \code{shift_along_q()}}{
 Shift \code{i} places along the \code{q} axis.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CubeCoords$shift_on_q(i = 1, in_place = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{CubeCoords$shift_along_q(i = 1, in_place = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -200,12 +200,12 @@ cloned otherwise.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-shift_on_r"></a>}}
-\if{latex}{\out{\hypertarget{method-shift_on_r}{}}}
-\subsection{Method \code{shift_on_r()}}{
+\if{html}{\out{<a id="method-shift_along_r"></a>}}
+\if{latex}{\out{\hypertarget{method-shift_along_r}{}}}
+\subsection{Method \code{shift_along_r()}}{
 Shift \code{i} places along the \code{r} axis.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CubeCoords$shift_on_r(i = 1, in_place = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{CubeCoords$shift_along_r(i = 1, in_place = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -221,12 +221,12 @@ cloned otherwise.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-shift_on_s"></a>}}
-\if{latex}{\out{\hypertarget{method-shift_on_s}{}}}
-\subsection{Method \code{shift_on_s()}}{
+\if{html}{\out{<a id="method-shift_along_s"></a>}}
+\if{latex}{\out{\hypertarget{method-shift_along_s}{}}}
+\subsection{Method \code{shift_along_s()}}{
 Shift \code{i} places along the \code{s} axis.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CubeCoords$shift_on_s(i = 1, in_place = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{CubeCoords$shift_along_s(i = 1, in_place = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

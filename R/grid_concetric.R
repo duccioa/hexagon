@@ -39,7 +39,7 @@
 #' @title Concentric Hex Grid
 #' @description Create a concentric hex grid in the geographical space. Concetric
 #' grids are built in concentric rings around an hexagon origin. The overall
-#' shape resembles an hexagon and the size is roughly `4 * n * hexagon_radius`
+#' shape resembles an hexagon and the diameter is roughly `4 * n * hexagon_radius`.
 #' @param hexagon_radius the radius of the hexagon's circumscribed circle.
 #' @param n the number of rings around the origin hexagon.
 #' @param identifier_name character, the name of the identifier column
