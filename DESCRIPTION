@@ -1,7 +1,7 @@
 Package: hexagon
 Type: Package
 Title: Hexagon geometries
-Version: 0.1.0
+Version: 0.2.0
 Author: Duccio Aiazzi
 Maintainer: Duccio Aiazzi <d.aiazzi@smart4cast.com>
 Description: A library to create hexagon geometries
@@ -17,6 +17,9 @@ Depends:
 Imports:
     magrittr
 Suggests: 
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
+VignetteBuilder: knitr

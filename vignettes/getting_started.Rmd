@@ -1,0 +1,43 @@
+---
+title: "Getting started"
+output: rmarkdown::html_vignette
+vignette: >
+%\VignetteIndexEntry{Getting started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  ---
+  
+  ```{r, include = FALSE}
+  knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+  )
+  ```
+  
+  ```{r setup, echo=FALSE}
+  library(hexagon)
+library(mapview)
+```
+
+Create an hexagon grid on Paris.
+
+```{r grid}
+g = hex_ring_grid(hexagon_radius=400, n=4,planar_origin=c(261354,6249876),
+                  crs_input=3857, crs_output=4326, pointy_top=TRUE)
+```
+
+Create an `sf` object for visualisation.
+
+```{r sf}
+nm = generate_names(length(g))
+sg = sf::st_sf(names=nm, geometry=g, crs = 4326)
+```
+
+Plot.
+
+```{r}
+mapview(sg, color="red", alhpa=0.1,
+        alpha.regions=0.1, col.regions="yellow", 
+        legend=FALSE)
+```
+
