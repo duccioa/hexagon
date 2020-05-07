@@ -2,9 +2,56 @@
 % Please edit documentation in R/class-Coords.R
 \name{Coords}
 \alias{Coords}
+\alias{[.Coords}
+\alias{dim.Coords}
+\alias{+.Coords}
+\alias{add.Coords}
+\alias{-.Coords}
+\alias{subtract.Coords}
+\alias{*.Coords}
+\alias{scale.Coords}
 \title{Coordinates class}
+\usage{
+\method{[}{Coords}(x, i)
+
+\method{dim}{Coords}(x)
+
+\method{+}{Coords}(a, b, na.rm = FALSE)
+
+add.Coords(a, b, na.rm = FALSE)
+
+\method{-}{Coords}(a, b, na.rm = FALSE)
+
+subtract.Coords(a, b, na.rm = FALSE)
+
+\method{*}{Coords}(x, k)
+
+\method{scale}{Coords}(x, k)
+}
 \description{
-A class to manage the basic functions of the coordinates.
+A class to manage the basic functions of an n dimension coordinate system.
+}
+\section{Functions}{
+\itemize{
+\item \code{[.Coords}: Subset by index as in any numeric vector x\link{i}.
+
+\item \code{dim.Coords}: Number of dimension of the coordinate system.
+
+\item \code{+.Coords}: Sum \code{Coords} objects as in \code{A + B}.
+
+\item \code{add.Coords}: Add two \code{Coords} objects with \code{add(A, B)}.
+
+\item \code{-.Coords}: Subtract \code{Coords} objects as in \code{A - B}.
+
+\item \code{subtract.Coords}: Subtract two \code{Coords} objects with \code{subtract(A, B)}.
+
+\item \code{*.Coords}: Scale a \code{Coords} object with \code{A * k}.
+
+\item \code{scale.Coords}: Scale a \code{Coords} object with \code{scale(A, k)}.
+}}
+
+\references{
+\link{https://www.redblobgames.com/grids/hexagons}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
@@ -21,6 +68,7 @@ A class to manage the basic functions of the coordinates.
 \item \href{#method-get}{\code{Coords$get()}}
 \item \href{#method-dim}{\code{Coords$dim()}}
 \item \href{#method-print}{\code{Coords$print()}}
+\item \href{#method-clone}{\code{Coords$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
@@ -49,13 +97,16 @@ An object of class \code{Coords}.
 \subsection{Method \code{set()}}{
 Set the numeric value of the coordinates.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Coords$set(x)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Coords$set(x, in_place = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{x}}{A numeric vector.}
+
+\item{\code{in_place}}{logical. If TRUE the instance is modifed by reference and
+cloned otherwise.}
 }
 \if{html}{\out{</div>}}
 }
@@ -103,5 +154,22 @@ A number.
 \if{html}{\out{<div class="r">}}\preformatted{Coords$print()}\if{html}{\out{</div>}}
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
+\subsection{Method \code{clone()}}{
+The objects of this class are cloneable with this method.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Coords$clone(deep = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{deep}}{Whether to make a deep clone.}
+}
+\if{html}{\out{</div>}}
+}
 }
 }

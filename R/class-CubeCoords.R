@@ -1,10 +1,18 @@
 # CubeCoords class ----
-
 #' @name CubeCoords
 #' @title Cube coordinates class
-#' @description A class `Coords`of cube coordinates.
+#' @description A class `Coords`of cube coordinates. Cube coordinates are specific
+#' for hexagon and are based on three dimensions with the constrain `q + r + s = 0`.
+#' The implementation and the notation of this package follow the exaplanation given
+#' in the blog [redblobgames](https://www.redblobgames.com/grids/hexagons).
+#' To be noted that in the theory page, the notation is `x, y, z` and in the
+#' implementation is `q, r, s` with x -> q, z -> r and y -> s. This package follows
+#' the latter notation.
+#' @usage CubeCoords$new(x)
+#' @param x Numeric coordinates of length 3.
 #' @param in_place logical. If TRUE the instance is modifed by reference and
 #' cloned otherwise.
+#' @references \link{https://www.redblobgames.com/grids/hexagons}
 #' @export
 CubeCoords = R6::R6Class(
   "CubeCoords",
@@ -12,7 +20,6 @@ CubeCoords = R6::R6Class(
   public = list(
     # Public methods ----
     #' @description Initialise a new instance.
-    #' @param x Numeric coordinates of length 3.
     #' @return An object of class `CubeCoords`.
     initialize = function(x){
       x = private$._parse_input(x)
@@ -21,7 +28,6 @@ CubeCoords = R6::R6Class(
     }
     # Public fields ----
     #' @description Set the coordinates value.
-    #' @param x Numeric coordinates of length 3.
     #' @return Invisible self.
     ,set = function(x, in_place=TRUE){
       if(in_place){
@@ -61,34 +67,43 @@ CubeCoords = R6::R6Class(
       self$set(coords, in_place=in_place)
     }
     #' @description Get coodinate values.
-    #' @param x The index of the dimension to be retrieved or
+    #' @param y The index of the dimension to be retrieved or
     #' the name as a string 'q', 'r' or 's'.
     #' @return A numeric value. As many as `NA_real_` as there are indexes
     #' out of boundaries.
-    ,get = function(x){
-      if(missing(x)) out = private$.coords
-      else {if(is.character(x)){
-        i = switchv(x,
+    ,get = function(y){
+      if(missing(y)) out = private$.coords
+      else {if(is.character(y)){
+        i = switchv(y,
                     'q'=1,
                     'r'=2,
                     's'=3)
         if(is_list(i)) do.call(c, i)
         self$get(i)
       }
-        else if(is.numeric(x)){
-          i = x
+        else if(is.numeric(y)){
+          i = y
         }
-        else stop("'x' must be numeric or character")
+        else stop("'y' must be numeric or character")
         out = super$get(i)
       }
       return(out)
     }
+    #' @description Shift `i` places along the `q` axis.
+    #' @param i An integer, indicating how many places to shift. The sign determines
+    #' the direction along the axis.
     ,shift_on_q = function(i, in_place=TRUE){
       self$set_q(self$q + i, in_place=in_place)
     }
+    #' @description Shift `i` places along the `r` axis.
+    #' @param i An integer, indicating how many places to shift. The sign determines
+    #' the direction along the axis.
     ,shift_on_r = function(i, in_place=TRUE){
       self$set_r(self$r + i, in_place=in_place)
     }
+    #' @description Shift `i` places along the `s` axis.
+    #' @param i An integer, indicating how many places to shift. The sign determines
+    #' the direction along the axis.
     ,shift_on_s = function(i, in_place=TRUE){
       new_q = self$q + i
       new_r = self$r + i
@@ -139,15 +154,19 @@ CubeCoords = R6::R6Class(
 )
 
 # Methods ----
+#' @describeIn CubeCoords Rotate left method for a cube center.
 rotate_left = function(object) {
   UseMethod("rotate_left")
 }
+#' @describeIn CubeCoords Rotate right method for a cube center.
 rotate_right = function(object) {
   UseMethod("rotate_right")
 }
+
 rotate_left.CubeCoords = function(a){
   CubeCoords$new(c(-a$s, -a$q, -a$r))
 }
+
 rotate_right.CubeCoords = function(a){
   CubeCoords$new(c(-a$r, -a$s, -a$q))
 }

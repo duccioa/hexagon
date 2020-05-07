@@ -1,6 +1,9 @@
 #' @name Coords
 #' @title Coordinates class
-#' @description A class to manage the basic functions of the coordinates.
+#' @description A class to manage the basic functions of an n dimension coordinate system.
+#' @param in_place logical. If TRUE the instance is modifed by reference and
+#' cloned otherwise.
+#' @references \link{https://www.redblobgames.com/grids/hexagons}
 #' @export
 Coords = R6::R6Class(
   "Coords",
@@ -48,6 +51,7 @@ Coords = R6::R6Class(
     }
     #' @description `print` method for class `Coords`.
     ,print = function(){
+      cat(sprintf("Class %s object\n", class(self)[1]))
       print(self$value)
       invisible(self)
     }
@@ -76,14 +80,16 @@ Coords = R6::R6Class(
 
 # Methods ----
 
-
+#' @describeIn Coords Subset by index as in any numeric vector x[i].
 `[.Coords` = function(x, i) {
   x$value[[i]]
 }
 
+#' @describeIn Coords Number of dimension of the coordinate system.
 dim.Coords = function(x) x$dim()
 
 
+#' @describeIn Coords Sum `Coords` objects as in `A + B`.
 `+.Coords` = function(a, b, na.rm=FALSE){
   assert_that(dim(a) == dim(a),
               msg="'a' and 'b' must have the same number of dimensions")
@@ -93,8 +99,10 @@ dim.Coords = function(x) x$dim()
   initiate_instance(x, what=class(a)[1])
 }
 
+#' @describeIn Coords Add two `Coords` objects with `add(A, B)`.
 add.Coords = `+.Coords`
 
+#' @describeIn Coords Subtract `Coords` objects as in `A - B`.
 `-.Coords` = function(a, b, na.rm=FALSE){
   assert_that(a$dim() == b$dim(),
               msg="'a' and 'b' must have the same number of dimensions")
@@ -104,8 +112,11 @@ add.Coords = `+.Coords`
   initiate_instance(x, what=class(a)[1])
 }
 
+#' @describeIn Coords Subtract two `Coords` objects with `subtract(A, B)`.
 subtract.Coords = `-.Coords`
 
+
+#' @describeIn Coords Scale a `Coords` object with `A * k`.
 `*.Coords` = function(x, k){
   assert_that(is.numeric(k),
               msg="'k' must be numeric")
@@ -113,6 +124,7 @@ subtract.Coords = `-.Coords`
   initiate_instance(v, what=class(x)[1])
 }
 
+#' @describeIn Coords Scale a `Coords` object with `scale(A, k)`.
 scale.Coords = `*.Coords`
 
 

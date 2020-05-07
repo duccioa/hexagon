@@ -5,6 +5,8 @@
 \alias{is_HexCenter}
 \alias{is_Coords}
 \alias{is_CubeCoords}
+\alias{is_Hexagon}
+\alias{is_PointyHexagon}
 \title{Does it inherits from a class?}
 \usage{
 is_HexCenter(x)
@@ -12,6 +14,12 @@ is_HexCenter(x)
 is_Coords(x)
 
 is_CubeCoords(x)
+
+is_Hexagon(x)
+
+is_PointyHexagon(x)
+
+is_PointyHexagon(x)
 }
 \arguments{
 \item{x}{an R object.}
@@ -29,5 +37,11 @@ Set of functions that checks whether an object inherits from a certain class.
 \item \code{is_Coords}: TRUE if x inherits from class \code{Coords}.
 
 \item \code{is_CubeCoords}: TRUE if x inherits from class \code{CubeCoords}.
+
+\item \code{is_Hexagon}: TRUE if x inherits from class \code{Hexagon}.
+
+\item \code{is_PointyHexagon}: TRUE if x inherits from class \code{PointyHexagon}.
+
+\item \code{is_PointyHexagon}: TRUE if x inherits from class \code{FlatHexagon}.
 }}
 

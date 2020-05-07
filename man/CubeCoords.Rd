@@ -2,9 +2,34 @@
 % Please edit documentation in R/class-CubeCoords.R
 \name{CubeCoords}
 \alias{CubeCoords}
+\alias{rotate_left}
+\alias{rotate_right}
 \title{Cube coordinates class}
+\usage{
+CubeCoords$new(x)
+
+rotate_left(object)
+
+rotate_right(object)
+}
 \description{
-A class \code{Coords}of cube coordinates.
+A class \code{Coords}of cube coordinates. Cube coordinates are specific
+for hexagon and are based on three dimensions with the constrain \code{q + r + s = 0}.
+The implementation and the notation of this package follow the exaplanation given
+in the blog \href{https://www.redblobgames.com/grids/hexagons}{redblobgames}.
+To be noted that in the theory page, the notation is \verb{x, y, z} and in the
+implementation is \verb{q, r, s} with x -> q, z -> r and y -> s. This package follows
+the latter notation.
+}
+\section{Functions}{
+\itemize{
+\item \code{rotate_left}: Rotate left method for a cube center.
+
+\item \code{rotate_right}: Rotate right method for a cube center.
+}}
+
+\references{
+\link{https://www.redblobgames.com/grids/hexagons}
 }
 \section{Super class}{
 \code{\link[hexagon:Coords]{hexagon::Coords}} -> \code{CubeCoords}
@@ -25,7 +50,12 @@ A class \code{Coords}of cube coordinates.
 \itemize{
 \item \href{#method-new}{\code{CubeCoords$new()}}
 \item \href{#method-set}{\code{CubeCoords$set()}}
+\item \href{#method-set_q}{\code{CubeCoords$set_q()}}
+\item \href{#method-set_r}{\code{CubeCoords$set_r()}}
 \item \href{#method-get}{\code{CubeCoords$get()}}
+\item \href{#method-shift_on_q}{\code{CubeCoords$shift_on_q()}}
+\item \href{#method-shift_on_r}{\code{CubeCoords$shift_on_r()}}
+\item \href{#method-shift_on_s}{\code{CubeCoords$shift_on_s()}}
 \item \href{#method-clone}{\code{CubeCoords$clone()}}
 }
 }
@@ -63,13 +93,62 @@ An object of class \code{CubeCoords}.
 \subsection{Method \code{set()}}{
 Set the coordinates value.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CubeCoords$set(x)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{CubeCoords$set(x, in_place = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{x}}{Numeric coordinates of length 3.}
+
+\item{\code{in_place}}{logical. If TRUE the instance is modifed by reference and
+cloned otherwise.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Invisible self.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_q"></a>}}
+\if{latex}{\out{\hypertarget{method-set_q}{}}}
+\subsection{Method \code{set_q()}}{
+Set the 'q' coordinate value.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{CubeCoords$set_q(q, in_place = TRUE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{q}}{Numeric coordinate of length 1.}
+
+\item{\code{in_place}}{logical. If TRUE the instance is modifed by reference and
+cloned otherwise.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Invisible self.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_r"></a>}}
+\if{latex}{\out{\hypertarget{method-set_r}{}}}
+\subsection{Method \code{set_r()}}{
+Set the 'r' coordinate value.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{CubeCoords$set_r(r, in_place = TRUE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{r}}{Numeric coordinate of length 1.}
+
+\item{\code{in_place}}{logical. If TRUE the instance is modifed by reference and
+cloned otherwise.}
 }
 \if{html}{\out{</div>}}
 }
@@ -83,13 +162,13 @@ Invisible self.
 \subsection{Method \code{get()}}{
 Get coodinate values.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CubeCoords$get(x)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{CubeCoords$get(y)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{x}}{The index of the dimension to be retrieved or
+\item{\code{y}}{The index of the dimension to be retrieved or
 the name as a string 'q', 'r' or 's'.}
 }
 \if{html}{\out{</div>}}
@@ -97,6 +176,69 @@ the name as a string 'q', 'r' or 's'.}
 \subsection{Returns}{
 A numeric value. As many as \code{NA_real_} as there are indexes
 out of boundaries.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-shift_on_q"></a>}}
+\if{latex}{\out{\hypertarget{method-shift_on_q}{}}}
+\subsection{Method \code{shift_on_q()}}{
+Shift \code{i} places along the \code{q} axis.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{CubeCoords$shift_on_q(i, in_place = TRUE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{i}}{An integer, indicating how many places to shift. The sign determines
+the direction along the axis.}
+
+\item{\code{in_place}}{logical. If TRUE the instance is modifed by reference and
+cloned otherwise.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-shift_on_r"></a>}}
+\if{latex}{\out{\hypertarget{method-shift_on_r}{}}}
+\subsection{Method \code{shift_on_r()}}{
+Shift \code{i} places along the \code{r} axis.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{CubeCoords$shift_on_r(i, in_place = TRUE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{i}}{An integer, indicating how many places to shift. The sign determines
+the direction along the axis.}
+
+\item{\code{in_place}}{logical. If TRUE the instance is modifed by reference and
+cloned otherwise.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-shift_on_s"></a>}}
+\if{latex}{\out{\hypertarget{method-shift_on_s}{}}}
+\subsection{Method \code{shift_on_s()}}{
+Shift \code{i} places along the \code{s} axis.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{CubeCoords$shift_on_s(i, in_place = TRUE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{i}}{An integer, indicating how many places to shift. The sign determines
+the direction along the axis.}
+
+\item{\code{in_place}}{logical. If TRUE the instance is modifed by reference and
+cloned otherwise.}
+}
+\if{html}{\out{</div>}}
 }
 }
 \if{html}{\out{<hr>}}

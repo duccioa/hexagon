@@ -22,3 +22,18 @@ is_Coords = function(x){
 is_CubeCoords = function(x){
   inherits(x, "CubeCoords")
 }
+#' @describeIn is_class TRUE if x inherits from class `Hexagon`.
+#' @export
+is_Hexagon = function(x){
+  inherits(x, "Hexagon")
+}
+#' @describeIn is_class TRUE if x inherits from class `PointyHexagon`.
+#' @export
+is_PointyHexagon = function(x){
+  inherits(x, "PointyHexagon")
+}
+#' @describeIn is_class TRUE if x inherits from class `FlatHexagon`.
+#' @export
+is_PointyHexagon = function(x){
+  inherits(x, "FlatHexagon")
+}

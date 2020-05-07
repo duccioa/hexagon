@@ -9,10 +9,12 @@ License: AGPL-3
 Encoding: UTF-8
 LazyData: true
 Depends:
-  R6,
-  rlang,
-  assertthat,
-  sf
+    R6,
+    rlang,
+    assertthat,
+    sf
+Imports:
+    magrittr
 Suggests: 
     testthat
 Roxygen: list(markdown = TRUE)
