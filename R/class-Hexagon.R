@@ -7,16 +7,10 @@
 #' An hexagon is defined by its size and its position within the grid. A geographical
 #' hexagon is also defined by its geographical position.
 #'
-#' Bear in mind the difference between the `center`,
-#'  which is the center of the hexagon in the cube coordinate system, and the
-#'  `planar_origin`, which is the origin of the cube coordinate system translated
-#'  to the `crs_input` system.
-#'
 #' @section Geographical reference:
 #'
-#' In order to place the hexagon in place, a geographical origin and a size must be
-#' specified. The geographical origin is assumed to be in planar coordinates,
-#' the output can be any valid EPSG code.
+#' In order to place the hexagon in place, a geographical origin must be
+#' specified. The geographical origin is assumed to be in planar coordinates.
 #'
 #' @param center A vector of cube coordinates or an object that can be coerced to
 #' a `HexCubeCenter`.
@@ -25,10 +19,6 @@
 #' @param planar_origin A vector of geographical coordinates.
 #' If `NULL`, it is set to 0,0.
 #' @param pointy_top Logical.
-#' @param crs_input A number. It determines the geographical reference
-#' of the input.
-#' @param crs_output A number. It determines the geographical reference
-#' of the output.
 #' @param in_place logical. If TRUE the instance is modifed by reference and
 #' cloned otherwise.
 #' @references \link{https://www.redblobgames.com/grids/hexagons}
@@ -39,15 +29,13 @@ Hexagon = R6::R6Class(
     #' @description Initialise a new instance.
     #' @return An object of class `Hexagon`.
     initialize = function(center, size=NULL, planar_origin=NULL,
-                          crs_input=NULL, crs_output=crs_input, pointy_top=TRUE){
+                          pointy_top=TRUE){
       assert_that(is_logical(pointy_top),
                   msg="'pointy_top' must be logical")
       private$.pointy_top = pointy_top
       self$set_size(size, in_place=TRUE)
       self$set_center(center, in_place=TRUE)
-      self$set_crs_input(crs_input)
-      self$set_crs_output(crs_output)
-      self$set_planar_origin(planar_origin, crs_input, in_place=TRUE)
+      self$set_planar_origin(planar_origin, in_place=TRUE)
       invisible(self)
     }
     #' @description Deep clone function.
@@ -56,8 +44,8 @@ Hexagon = R6::R6Class(
       cc$.__enclos_env__$private$.cube_center = cc$center$clone()
       return(cc)
     }
-    #' @description Compute vertices' geographical coordinates in the
-    #' planar `crs_input` system.
+    #' @description Compute vertices' geographical coordinates in
+    #' planar coordinates.
     #' @return A numeric matrix 6 by 2.
     ,v_planar_coordinates = function(){
       center = self$get_planar_center()$value
@@ -72,7 +60,7 @@ Hexagon = R6::R6Class(
     #' @return Logical.
     ,is_pointy = function() {private$.pointy_top}
     #' @description Compute the geographical coordinates of the hex
-    #' center in the planar `crs_input` coordinate system.
+    #' center in planar coordinate system.
     #' @return An object of class `Coords`.
     ,get_planar_center = function(){
       center = self$center
@@ -95,22 +83,19 @@ Hexagon = R6::R6Class(
     }
     #' @description Set the the planar origin.
     #' @param x Geographical coordinates.
-    ,set_planar_origin = function(x, crs_input, in_place=TRUE){
+    ,set_planar_origin = function(x, in_place=TRUE){
       if(rlang::is_null(x)) x = c(0, 0, 0)
-      if(missing(crs_input)) self$crs_input
       assert_that(is.numeric(x),
                   msg="'planar_origin' must be numeric")
       assert_that(length(x)==2,
                   msg="'planar_origin' must be numeric of length 2")
       if(in_place){
         private$.planar_origin = x
-        self$set_crs_input(crs_input, in_place=TRUE)
         invisible(self)
       }
       else {
         cc = self$deep_clone()
         cc$set_planar_origin(x, in_place=TRUE)
-        cc$set_crs_input(crs_input, in_place=TRUE)
         return(cc)
       }
     }
@@ -131,44 +116,9 @@ Hexagon = R6::R6Class(
         return(cc)
       }
     }
-    #' @description Set the coordinate reference system of the planar origin.
-    #' Does not perform any transformation.
-    ,set_crs_input = function(crs_input, in_place=TRUE){
-      if(in_place){
-        if(rlang::is_null(crs_input)) private$.crs_input = crs_input
-        else{
-          assert_that(is.numeric(crs_input),
-                      msg="'crs_input' must be numeric")
-          private$.crs_input = crs_input
-        }
-        invisible(self)
-      }
-      else{
-        cc = self$deep_clone()
-        cc$set_crs_input(crs_input, in_place=TRUE)
-        return(cc)
-      }
-
-    }
-    #' @description Set the coordinate reference system of the output. It is used to
-    #' transform the the `crs_input` into any valid ESPG system via `sf::st_transform`.
-    ,set_crs_output = function(crs_output, in_place=TRUE){
-      if(in_place){
-        if(rlang::is_null(crs_output)) crs_output = private$.crs_input
-        assert_that(is.numeric(crs_output),
-                    msg="'crs_input' must be numeric")
-        private$.crs_output = crs_output
-        invisible(self)
-      }
-      else{
-        cc = self$deep_clone()
-        cc$set_crs_output(crs_output, in_place=TRUE)
-        return(cc)
-      }
-    }
     #' @description Compute the geographical
-    #' representation of the polygon in `crs_output` reference system.
-    #' @return An object of class `sfg` (see package `sf`).
+    #' representation of the polygon in planar coordinates.
+    #' @return An object of class `XY, POLYGON, sfg` (see package `sf`).
     ,to_polygon = function(){
       coords = self$v_planar_coordinates()
       coords = rbind(coords, coords[1,])
@@ -202,20 +152,6 @@ Hexagon = R6::R6Class(
       else
         stop("Read-only value, use set methods instead")
     }
-    #' @field crs_input CRS code of the planar origin.
-    ,crs_input = function(x){
-      if(missing(x))
-        private$.crs_input
-      else
-        stop("Read-only value, use set methods instead")
-    }
-    #' @field crs_output CRS code of the polygon output.
-    ,crs_output = function(x){
-      if(missing(x))
-        private$.crs_output
-      else
-        stop("Read-only value, use set methods instead")
-    }
   ),
   private = list(
     # Hexagon's private fields ----
@@ -223,8 +159,6 @@ Hexagon = R6::R6Class(
     ,.cube_center = NULL
     ,.size = NULL
     ,.planar_origin = NULL
-    ,.crs_input = NULL
-    ,.crs_output = NULL
     # Hexagon's private methods ----
   )
 )
@@ -238,10 +172,6 @@ Hexagon = R6::R6Class(
 #' of the hexagon, in the units of the planar_origin.
 #' @param planar_origin A vector of geographical coordinates.
 #' If `NULL`, it is set to 0,0.
-#' @param crs_input A number. It determines the geographical reference
-#' of the input.
-#' @param crs_output A number. It determines the geographical reference
-#' of the output.
 #' @param in_place logical. If TRUE the instance is modifed by reference and
 #' cloned otherwise.
 #' @export
@@ -252,10 +182,9 @@ PointyHexagon = R6::R6Class(
     # PointyHexagon's public methods ----
     #' @description Initialise a new instance.
     #' @return An object of class `PointyHexagon`.
-    initialize = function(center, size=NULL, planar_origin=NULL,
-                          crs_input=3857, crs_output=crs_input){
-      super$initialize(center=center, size=size, planar_origin=planar_origin,
-                       crs_input=crs_input, crs_output=crs_output, pointy_top=TRUE)
+    initialize = function(center, size=NULL, planar_origin=NULL){
+      super$initialize(center=center, size=size,
+                       planar_origin=planar_origin, pointy_top=TRUE)
     }
     #' @description Shift the hex center of `i` places in the cube system,
     #' along the `q` axis.
