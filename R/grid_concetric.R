@@ -54,15 +54,31 @@
 #' @return An `sfg` object.
 #' @references \link{https://www.redblobgames.com/grids/hexagons}
 #' @export
-hex_grid_concentric = function(hexagon_radius=100, n=5, planar_origin=NULL,
+hex_ring_grid = function(hexagon_radius=100, n=5, planar_origin=NULL,
                               crs_input=3857, crs_output=4326, pointy_top=TRUE){
   cc = HexCubeCenter$new(c(0,0))
   coords_list = .coords_grid_concetric(n)
   center_list = .hex_cube_center_v(coords_list)
-  center_list = c(cc, center_list)
+  # center_list = c(cc, center_list)
   pol_list = lapply(center_list,
                     function(z) PointyHexagon$new(z, hexagon_radius, planar_origin)$to_polygon()
   )
-
+  sfc = sf::st_sfc(pol_list, crs=crs_input)
+  return(sf::st_transform(sfc, crs_output))
 }
 
+#' @describeIn hex_ring_grid Return a character vector of WKT geometries.
+#' @export
+hex_ring_grid_wkt = function(hexagon_radius=100, n=5, planar_origin=NULL,
+                               crs_input=3857, crs_output=4326, pointy_top=TRUE){
+  sfc = hex_ring_grid(hexagon_radius, n, planar_origin,
+                      crs_input, crs_output, pointy_top)
+  sf::st_as_text(sfc)
+}
+
+#' @title Count of element in a concentric grid
+#' @inheritParams hex_ring_grid
+#' @export
+hex_ring_grid_count = function(n=5){
+  sum(1:n * 6) + 1
+}

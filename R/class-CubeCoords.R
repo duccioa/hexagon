@@ -1,5 +1,4 @@
 # CubeCoords class ----
-#' @name CubeCoords
 #' @title Cube coordinates class
 #' @description A class `Coords`of cube coordinates. Cube coordinates are specific
 #' for hexagon and are based on three dimensions with the constrain `q + r + s = 0`.
@@ -92,19 +91,19 @@ CubeCoords = R6::R6Class(
     #' @description Shift `i` places along the `q` axis.
     #' @param i An integer, indicating how many places to shift. The sign determines
     #' the direction along the axis.
-    ,shift_on_q = function(i, in_place=TRUE){
+    ,shift_on_q = function(i=1, in_place=TRUE){
       self$set_q(self$q + i, in_place=in_place)
     }
     #' @description Shift `i` places along the `r` axis.
     #' @param i An integer, indicating how many places to shift. The sign determines
     #' the direction along the axis.
-    ,shift_on_r = function(i, in_place=TRUE){
+    ,shift_on_r = function(i=1, in_place=TRUE){
       self$set_r(self$r + i, in_place=in_place)
     }
     #' @description Shift `i` places along the `s` axis.
     #' @param i An integer, indicating how many places to shift. The sign determines
     #' the direction along the axis.
-    ,shift_on_s = function(i, in_place=TRUE){
+    ,shift_on_s = function(i=1, in_place=TRUE){
       new_q = self$q + i
       new_r = self$r + i
       self$set(c(new_q, new_r), in_place=in_place)

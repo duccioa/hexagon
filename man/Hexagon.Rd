@@ -9,18 +9,12 @@ or flat, depending on whether the top is a vertex or an edge.
 
 An hexagon is defined by its size and its position within the grid. A geographical
 hexagon is also defined by its geographical position.
-
-Bear in mind the difference between the \code{center},
-which is the center of the hexagon in the cube coordinate system, and the
-\code{planar_origin}, which is the origin of the cube coordinate system translated
-to the \code{crs_input} system.
 }
 \section{Geographical reference}{
 
 
-In order to place the hexagon in place, a geographical origin and a size must be
-specified. The geographical origin is assumed to be in planar coordinates,
-the output can be any valid EPSG code.
+In order to place the hexagon in place, a geographical origin must be
+specified. The geographical origin is assumed to be in planar coordinates.
 }
 
 \references{
@@ -35,10 +29,6 @@ the output can be any valid EPSG code.
 the center and any vertex of the hexagon.}
 
 \item{\code{planar_origin}}{numeric of length 2. The planar coordinates of the origin.}
-
-\item{\code{crs_input}}{CRS code of the planar origin.}
-
-\item{\code{crs_output}}{CRS code of the polygon output.}
 }
 \if{html}{\out{</div>}}
 }
@@ -53,8 +43,6 @@ the center and any vertex of the hexagon.}
 \item \href{#method-set_center}{\code{Hexagon$set_center()}}
 \item \href{#method-set_planar_origin}{\code{Hexagon$set_planar_origin()}}
 \item \href{#method-set_size}{\code{Hexagon$set_size()}}
-\item \href{#method-set_crs_input}{\code{Hexagon$set_crs_input()}}
-\item \href{#method-set_crs_output}{\code{Hexagon$set_crs_output()}}
 \item \href{#method-to_polygon}{\code{Hexagon$to_polygon()}}
 \item \href{#method-clone}{\code{Hexagon$clone()}}
 }
@@ -65,14 +53,7 @@ the center and any vertex of the hexagon.}
 \subsection{Method \code{new()}}{
 Initialise a new instance.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Hexagon$new(
-  center,
-  size = NULL,
-  planar_origin = NULL,
-  crs_input = NULL,
-  crs_output = crs_input,
-  pointy_top = TRUE
-)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Hexagon$new(center, size = NULL, planar_origin = NULL, pointy_top = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -86,12 +67,6 @@ of the hexagon, in the units of the planar_origin.}
 
 \item{\code{planar_origin}}{A vector of geographical coordinates.
 If \code{NULL}, it is set to 0,0.}
-
-\item{\code{crs_input}}{A number. It determines the geographical reference
-of the input.}
-
-\item{\code{crs_output}}{A number. It determines the geographical reference
-of the output.}
 
 \item{\code{pointy_top}}{Logical.}
 }
@@ -115,8 +90,8 @@ Deep clone function.
 \if{html}{\out{<a id="method-v_planar_coordinates"></a>}}
 \if{latex}{\out{\hypertarget{method-v_planar_coordinates}{}}}
 \subsection{Method \code{v_planar_coordinates()}}{
-Compute vertices' geographical coordinates in the
-planar \code{crs_input} system.
+Compute vertices' geographical coordinates in
+planar coordinates.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Hexagon$v_planar_coordinates()}\if{html}{\out{</div>}}
 }
@@ -143,7 +118,7 @@ Logical.
 \if{latex}{\out{\hypertarget{method-get_planar_center}{}}}
 \subsection{Method \code{get_planar_center()}}{
 Compute the geographical coordinates of the hex
-center in the planar \code{crs_input} coordinate system.
+center in planar coordinate system.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Hexagon$get_planar_center()}\if{html}{\out{</div>}}
 }
@@ -178,16 +153,13 @@ cloned otherwise.}
 \subsection{Method \code{set_planar_origin()}}{
 Set the the planar origin.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Hexagon$set_planar_origin(x, crs_input, in_place = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Hexagon$set_planar_origin(x, in_place = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{x}}{Geographical coordinates.}
-
-\item{\code{crs_input}}{A number. It determines the geographical reference
-of the input.}
 
 \item{\code{in_place}}{logical. If TRUE the instance is modifed by reference and
 cloned otherwise.}
@@ -217,61 +189,17 @@ cloned otherwise.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-set_crs_input"></a>}}
-\if{latex}{\out{\hypertarget{method-set_crs_input}{}}}
-\subsection{Method \code{set_crs_input()}}{
-Set the coordinate reference system of the planar origin.
-Does not perform any transformation.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Hexagon$set_crs_input(crs_input, in_place = TRUE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{crs_input}}{A number. It determines the geographical reference
-of the input.}
-
-\item{\code{in_place}}{logical. If TRUE the instance is modifed by reference and
-cloned otherwise.}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-set_crs_output"></a>}}
-\if{latex}{\out{\hypertarget{method-set_crs_output}{}}}
-\subsection{Method \code{set_crs_output()}}{
-Set the coordinate reference system of the output. It is used to
-transform the the \code{crs_input} into any valid ESPG system via \code{sf::st_transform}.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Hexagon$set_crs_output(crs_output, in_place = TRUE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{crs_output}}{A number. It determines the geographical reference
-of the output.}
-
-\item{\code{in_place}}{logical. If TRUE the instance is modifed by reference and
-cloned otherwise.}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-to_polygon"></a>}}
 \if{latex}{\out{\hypertarget{method-to_polygon}{}}}
 \subsection{Method \code{to_polygon()}}{
 Compute the geographical
-representation of the polygon in \code{crs_output} reference system.
+representation of the polygon in planar coordinates.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Hexagon$to_polygon()}\if{html}{\out{</div>}}
 }
 
 \subsection{Returns}{
-An object of class \code{sfg} (see package \code{sf}).
+An object of class \verb{XY, POLYGON, sfg} (see package \code{sf}).
 }
 }
 \if{html}{\out{<hr>}}

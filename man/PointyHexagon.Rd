@@ -39,8 +39,6 @@ the units of \code{size}.}
 \item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="Hexagon" data-id="get_planar_center">}\href{../../hexagon/html/Hexagon.html#method-get_planar_center}{\code{hexagon::Hexagon$get_planar_center()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="Hexagon" data-id="is_pointy">}\href{../../hexagon/html/Hexagon.html#method-is_pointy}{\code{hexagon::Hexagon$is_pointy()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="Hexagon" data-id="set_center">}\href{../../hexagon/html/Hexagon.html#method-set_center}{\code{hexagon::Hexagon$set_center()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="Hexagon" data-id="set_crs_input">}\href{../../hexagon/html/Hexagon.html#method-set_crs_input}{\code{hexagon::Hexagon$set_crs_input()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="Hexagon" data-id="set_crs_output">}\href{../../hexagon/html/Hexagon.html#method-set_crs_output}{\code{hexagon::Hexagon$set_crs_output()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="Hexagon" data-id="set_planar_origin">}\href{../../hexagon/html/Hexagon.html#method-set_planar_origin}{\code{hexagon::Hexagon$set_planar_origin()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="Hexagon" data-id="set_size">}\href{../../hexagon/html/Hexagon.html#method-set_size}{\code{hexagon::Hexagon$set_size()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="hexagon" data-topic="Hexagon" data-id="to_polygon">}\href{../../hexagon/html/Hexagon.html#method-to_polygon}{\code{hexagon::Hexagon$to_polygon()}}\out{</span>}
@@ -54,13 +52,7 @@ the units of \code{size}.}
 \subsection{Method \code{new()}}{
 Initialise a new instance.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PointyHexagon$new(
-  center,
-  size = NULL,
-  planar_origin = NULL,
-  crs_input = 3857,
-  crs_output = crs_input
-)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{PointyHexagon$new(center, size = NULL, planar_origin = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -74,12 +66,6 @@ of the hexagon, in the units of the planar_origin.}
 
 \item{\code{planar_origin}}{A vector of geographical coordinates.
 If \code{NULL}, it is set to 0,0.}
-
-\item{\code{crs_input}}{A number. It determines the geographical reference
-of the input.}
-
-\item{\code{crs_output}}{A number. It determines the geographical reference
-of the output.}
 }
 \if{html}{\out{</div>}}
 }
