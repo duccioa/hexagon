@@ -78,6 +78,7 @@ hex_neighbour = function(object, direction){
 #' @description `hex_neighbour` method for class HexCubeCenter
 #' @return An object of class `HexCubeCenter`.
 hex_neighbour.HexCubeCenter = function(hex, direction){
+  if(missing(direction)) stop("[hex_neighbour]: 'direction' missing with no default")
   add(hex, hex_direction(direction))
 }
 
@@ -90,6 +91,7 @@ hex_diagonal_neighbour = function(object, direction){
 #' @description `hex_diagonal_neighbour` method for class HexCubeCenter
 #' @return An object of class `HexCubeCenter`.
 hex_diagonal_neighbour.HexCubeCenter = function(hex, direction){
+  if(missing(direction)) stop("[hex_neighbour]: 'direction' missing with no default")
   add(hex, hex_diagonal_direction(direction))
 }
 

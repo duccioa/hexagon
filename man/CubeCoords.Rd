@@ -184,7 +184,7 @@ out of boundaries.
 \subsection{Method \code{shift_on_q()}}{
 Shift \code{i} places along the \code{q} axis.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CubeCoords$shift_on_q(i, in_place = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{CubeCoords$shift_on_q(i = 1, in_place = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -205,7 +205,7 @@ cloned otherwise.}
 \subsection{Method \code{shift_on_r()}}{
 Shift \code{i} places along the \code{r} axis.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CubeCoords$shift_on_r(i, in_place = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{CubeCoords$shift_on_r(i = 1, in_place = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -226,7 +226,7 @@ cloned otherwise.}
 \subsection{Method \code{shift_on_s()}}{
 Shift \code{i} places along the \code{s} axis.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CubeCoords$shift_on_s(i, in_place = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{CubeCoords$shift_on_s(i = 1, in_place = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

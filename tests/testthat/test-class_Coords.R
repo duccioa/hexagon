@@ -1,6 +1,5 @@
 
 test_that("Basic class Coods", {
-  load_all("./")
   c = hexagon::Coords$new(2)
   expect_equal(c$dim(), 1)
   expect_equal(c$get(), 2)
@@ -23,7 +22,6 @@ test_that("Basic class Coods", {
   expect_equal(c$value, c2$value)
 })
 test_that("Basic class Coods", {
-  load_all("./")
   x = c(0, 0, 0)
   c = hexagon::CubeCoords$new(x)
   c1 = hexagon::CubeCoords$new(x[1:2])
@@ -33,7 +31,7 @@ test_that("Basic class Coods", {
   expect_equal(c[1], x[1])
   expect_error(c[4], "subscript out of bounds")
   expect_equal(c$value, x)
-  expect_error(c$value = 3, "'x' must be length 2 or 3")
+  expect_error({c$value = 3}, "'x' must be length 2 or 3")
   y = c(1, 2, -3)
   c$value = y[1:2]
   expect_equal(c$value, y)
@@ -91,6 +89,8 @@ test_that("Sum and subtraction", {
 })
 
 test_that("Scale and rotate", {
+  x = c(1, 2, -3)
+  y = c(2, 3, -5)
   v1 = Coords$new(x)
   v2 = v1 * 2
   expect_true(is_Coords(v2))
@@ -99,7 +99,7 @@ test_that("Scale and rotate", {
   c1 = CubeCoords$new(y)
   c2 = c1 * 3
   expect_equal(c1$value * 2, y * 2)
-  expect_equal(c2$value, y * 2)
+  expect_equal(c2$value, y * 3)
 
   a = CubeCoords$new(x)
   b = rotate_left(a)

@@ -91,7 +91,7 @@ dim.Coords = function(x) x$dim()
 
 #' @describeIn Coords Sum `Coords` objects as in `A + B`.
 `+.Coords` = function(a, b, na.rm=FALSE){
-  assert_that(dim(a) == dim(a),
+  assert_that(dim(a) == dim(b),
               msg="'a' and 'b' must have the same number of dimensions")
   assert_that(identical(class(a), class(b)),
               msg="'a' and 'b' must share the same class")

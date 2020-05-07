@@ -24,9 +24,9 @@ the units of \code{size}.}
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{PointyHexagon$new()}}
-\item \href{#method-shift_on_q}{\code{PointyHexagon$shift_on_q()}}
-\item \href{#method-shift_on_r}{\code{PointyHexagon$shift_on_r()}}
-\item \href{#method-shift_on_s}{\code{PointyHexagon$shift_on_s()}}
+\item \href{#method-shift_along_q}{\code{PointyHexagon$shift_along_q()}}
+\item \href{#method-shift_along_r}{\code{PointyHexagon$shift_along_r()}}
+\item \href{#method-shift_along_s}{\code{PointyHexagon$shift_along_s()}}
 \item \href{#method-shift_along_direction}{\code{PointyHexagon$shift_along_direction()}}
 \item \href{#method-shift_along_diagonal_direction}{\code{PointyHexagon$shift_along_diagonal_direction()}}
 \item \href{#method-clone}{\code{PointyHexagon$clone()}}
@@ -74,13 +74,13 @@ An object of class \code{PointyHexagon}.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-shift_on_q"></a>}}
-\if{latex}{\out{\hypertarget{method-shift_on_q}{}}}
-\subsection{Method \code{shift_on_q()}}{
+\if{html}{\out{<a id="method-shift_along_q"></a>}}
+\if{latex}{\out{\hypertarget{method-shift_along_q}{}}}
+\subsection{Method \code{shift_along_q()}}{
 Shift the hex center of \code{i} places in the cube system,
 along the \code{q} axis.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PointyHexagon$shift_on_q(i, in_place = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{PointyHexagon$shift_along_q(i = 1, in_place = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -98,13 +98,13 @@ In place or a new \code{Hexagon}.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-shift_on_r"></a>}}
-\if{latex}{\out{\hypertarget{method-shift_on_r}{}}}
-\subsection{Method \code{shift_on_r()}}{
+\if{html}{\out{<a id="method-shift_along_r"></a>}}
+\if{latex}{\out{\hypertarget{method-shift_along_r}{}}}
+\subsection{Method \code{shift_along_r()}}{
 Shift the hex center of \code{i} places in the cube system,
 along the \code{r} axis.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PointyHexagon$shift_on_r(i, in_place = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{PointyHexagon$shift_along_r(i, in_place = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -122,13 +122,13 @@ In place or a new \code{Hexagon}.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-shift_on_s"></a>}}
-\if{latex}{\out{\hypertarget{method-shift_on_s}{}}}
-\subsection{Method \code{shift_on_s()}}{
+\if{html}{\out{<a id="method-shift_along_s"></a>}}
+\if{latex}{\out{\hypertarget{method-shift_along_s}{}}}
+\subsection{Method \code{shift_along_s()}}{
 Shift the hex center of \code{i} places in the cube system,
 along the \code{s} axis.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PointyHexagon$shift_on_s(i, in_place = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{PointyHexagon$shift_along_s(i = 1, in_place = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -151,7 +151,7 @@ In place or a new \code{Hexagon}.
 \subsection{Method \code{shift_along_direction()}}{
 Shift along a direction.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PointyHexagon$shift_along_direction(i, direction, in_place = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{PointyHexagon$shift_along_direction(i = 1, direction, in_place = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -178,7 +178,7 @@ In place or a new \code{Hexagon}.
 \subsection{Method \code{shift_along_diagonal_direction()}}{
 Shift along a diagonal direction.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PointyHexagon$shift_along_diagonal_direction(i, direction, in_place = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{PointyHexagon$shift_along_diagonal_direction(i = 1, direction, in_place = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

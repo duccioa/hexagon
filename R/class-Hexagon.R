@@ -190,27 +190,27 @@ PointyHexagon = R6::R6Class(
     #' along the `q` axis.
     #' @param i the distance of the shift in number of cells.
     #' @return In place or a new `Hexagon`.
-    ,shift_on_q = function(i, in_place=TRUE){
+    ,shift_along_q = function(i=1, in_place=TRUE){
       cc = self$center$clone()
-      cc$shift_on_q(i, in_place=TRUE)
+      cc$shift_along_q(i, in_place=TRUE)
       self$set_center(cc, in_place=in_place)
     }
     #' @description Shift the hex center of `i` places in the cube system,
     #' along the `r` axis.
     #' @param i the distance of the shift in number of cells.
     #' @return In place or a new `Hexagon`.
-    ,shift_on_r = function(i, in_place=TRUE){
+    ,shift_along_r = function(i, in_place=TRUE){
       cc = self$center$clone()
-      cc$shift_on_r(i, in_place=TRUE)
+      cc$shift_along_r(i=1, in_place=TRUE)
       self$set_center(cc, in_place=in_place)
     }
     #' @description Shift the hex center of `i` places in the cube system,
     #' along the `s` axis.
     #' @param i the distance of the shift in number of cells.
     #' @return In place or a new `Hexagon`.
-    ,shift_on_s = function(i, in_place=TRUE){
+    ,shift_along_s = function(i=1, in_place=TRUE){
       cc = self$center$clone()
-      cc$shift_on_s(i, in_place=TRUE)
+      cc$shift_along_s(i, in_place=TRUE)
       self$set_center(cc, in_place=in_place)
     }
     #' @description Shift along a direction.
@@ -219,7 +219,9 @@ PointyHexagon = R6::R6Class(
     #' in a pointy hexagon is to the right and the other are in sequence
     #' anti-clockwise.
     #' @return In place or a new `Hexagon`.
-    ,shift_along_direction = function(i, direction, in_place=TRUE){
+    ,shift_along_direction = function(i=1, direction, in_place=TRUE){
+      if(missing(direction))
+        stop("[shift_along_direction]: 'direction' missing with no default")
       cc = self$center$clone()
       cc_shifted = hex_neighbour(cc, direction) * i
       self$set_center(cc_shifted, in_place=in_place)
@@ -228,11 +230,26 @@ PointyHexagon = R6::R6Class(
     #' @param i the distance of the shift in number of cells.
     #' @param direction a number from 1 to 6, corresponding to a direction.
     #' @return In place or a new `Hexagon`.
-    ,shift_along_diagonal_direction = function(i, direction,
+    ,shift_along_diagonal_direction = function(i=1, direction,
                                                in_place=TRUE){
+      if(missing(direction))
+        stop("[shift_along_diagonal_direction]: 'direction' missing with no default")
       cc = self$center$clone()
       cc_shifted = hex_diagonal_neighbour(cc, direction) * i
       self$set_center(cc_shifted, in_place=in_place)
+    }
+    ,print = function(){
+      l = list(
+        sprintf("Object of class %s", class(self)[1])
+        ,sprintf("Size: %s", self$size)
+        ,sprintf("Pointy top: %s", self$is_pointy())
+        ,sprintf("Planar origin: [%s]", paste(self$planar_origin,
+                                              collapse=","))
+        ,sprintf("Center: \n[%s]", paste(self$center$value,
+                                       collapse=","))
+      )
+      cat(do.call(paste, list(l, collapse="\n")))
+      invisible(self)
     }
   ),
   active = list(
