@@ -9,11 +9,11 @@ License: AGPL-3
 Encoding: UTF-8
 LazyData: true
 Depends:
-    R (>= 2.10)
-Imports:
+    R (>= 2.10),
     R6,
     rlang,
-    assertthat,
+    assertthat
+Imports:
     sf,
     magrittr
 Suggests: 
