@@ -2,9 +2,12 @@ Package: hexagon
 Type: Package
 Title: Hexagon geometries
 Version: 0.2.0
-Author: Duccio Aiazzi
-Maintainer: Duccio Aiazzi <d.aiazzi@smart4cast.com>
-Description: A library to create hexagon geometries
+Authors@R: 
+    person(given = "Duccio",
+           family = "Aiazzi",
+           role = c("aut", "cre"),
+           email = "d.aiazzi@smart4cast.com.com")
+Description: A library to create hexagon grids.
 License: AGPL-3
 Encoding: UTF-8
 LazyData: true
