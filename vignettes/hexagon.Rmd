@@ -2,19 +2,19 @@
 title: "Getting started"
 output: rmarkdown::html_vignette
 vignette: >
-%\VignetteIndexEntry{Getting started}
+  %\VignetteIndexEntry{Getting started}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-  ---
-  
-  ```{r, include = FALSE}
-  knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-  )
-  ```
-  
-  ```{r setup, echo=FALSE}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+collapse = TRUE,
+comment = "#>"
+)
+```
+
+```{r setup, echo=FALSE}
   library(hexagon)
 library(mapview)
 ```

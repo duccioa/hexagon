@@ -6,8 +6,6 @@
 \alias{rotate_right}
 \title{Cube coordinates class}
 \usage{
-CubeCoords$new(x)
-
 rotate_left(object)
 
 rotate_right(object)

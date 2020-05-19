@@ -6,8 +6,6 @@
 \alias{hex_diagonal_neighbour}
 \title{Class object for hexagon center}
 \usage{
-HexCubeCenter$new(x)
-
 hex_neighbour(object, direction)
 
 hex_diagonal_neighbour(object, direction)

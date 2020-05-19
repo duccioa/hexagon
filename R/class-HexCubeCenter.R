@@ -3,7 +3,6 @@
 #' @description This is a class that contains the Cube coordinates of the center
 #' of an Hexagon.
 #' It inherits from `CubeCoords` but it is specific for `Hexagon`.
-#' @usage HexCubeCenter$new(x)
 #' @param x A numeric vector of length 3 or 2, whose sum is 0.
 #' @references \link{https://www.redblobgames.com/grids/hexagons}
 #' @export

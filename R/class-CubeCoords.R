@@ -7,7 +7,6 @@
 #' To be noted that in the theory page, the notation is `x, y, z` and in the
 #' implementation is `q, r, s` with x -> q, z -> r and y -> s. This package follows
 #' the latter notation.
-#' @usage CubeCoords$new(x)
 #' @param x Numeric coordinates of length 3.
 #' @param in_place logical. If TRUE the instance is modifed by reference and
 #' cloned otherwise.

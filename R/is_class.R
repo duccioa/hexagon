@@ -1,6 +1,5 @@
 #' Set of functions that checks whether an object inherits from a certain class.
 #' @param x an R object.
-#' @usage NULL
 #' @return Logical
 #' @rdname is_class
 #' @name is_<class>
